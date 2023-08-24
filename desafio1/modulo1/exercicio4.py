@@ -3,5 +3,5 @@
 valor_hora = float(input('Informe o valor da sua hora de trabalho: '))
 horas_trabalhadas = float(input('Informe a quantidade de horas trabalhadas no mês: '))
 salario = valor_hora * horas_trabalhadas
-print(f'O seu salário no mês é de R$ {salario}')
+print(f'O seu salário no mês é de R$ {salario:.2f}')
 
