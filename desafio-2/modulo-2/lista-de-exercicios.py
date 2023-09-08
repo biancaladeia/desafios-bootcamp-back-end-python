@@ -140,3 +140,71 @@ print(f"\nd) Total de clientes com saldo acima de 1000: {total_clientes_saldo_ma
 # Fechar a conexão
 conexao.close()
 
+
+'''
+7. Atualização e Remoção com Condições
+a) Atualize o saldo de um cliente específico.
+b) Remova um cliente pelo seu ID.
+'''
+
+# Função para atualizar o saldo de um cliente específico
+def atualizar_saldo(cliente_id, novo_saldo):
+    conexao = sqlite3.connect('exercicio.db')
+    c = conexao.cursor()
+    c.execute("UPDATE clientes SET saldo = ? WHERE id = ?", (novo_saldo, cliente_id))
+    conexao.commit()
+    conexao.close()
+
+# Função para remover um cliente pelo seu ID
+def remover_cliente(cliente_id):
+    conexao = sqlite3.connect('exercicio.db')
+    c = conexao.cursor()
+    c.execute("DELETE FROM clientes WHERE id = ?", (cliente_id,))
+    conexao.commit()
+    conexao.close()
+
+# a) Atualize o saldo de um cliente específico
+atualizar_saldo(2, 700.50)  # Atualiza o saldo do cliente com ID 2 para 700.50
+
+# b) Remova um cliente pelo seu ID
+remover_cliente(4)  # Remove o cliente com ID 4
+
+'''
+8. Junção de Tabelas
+Crie uma segunda tabela chamada "compras" com os campos: id
+(chave primária), cliente_id (chave estrangeira referenciando o id
+da tabela "clientes"), produto (texto) e valor (real). Insira algumas
+compras associadas a clientes existentes na tabela "clientes".
+Escreva uma consulta para exibir o nome do cliente, o produto e o
+valor de cada compra. '''
+
+import sqlite3
+
+# Conectar ao banco de dados
+conexao = sqlite3.connect('exercicio.db')
+c = conexao.cursor()
+
+# Criar a tabela "compras"
+c.execute('CREATE TABLE compras (id INTEGER PRIMARY KEY, cliente_id INTEGER, produto TEXT, valor REAL, FOREIGN KEY(cliente_id) REFERENCES clientes(id))')
+
+# Inserir algumas compras associadas a clientes existentes
+compras = [
+    (1, 1, 'Produto A', 100.50),
+    (2, 3, 'Produto B', 75.25),
+    (3, 2, 'Produto C', 50.75),
+    (4, 4, 'Produto A', 120.0),
+    (5, 5, 'Produto B', 90.0)
+]
+
+c.executemany("INSERT INTO compras VALUES (?, ?, ?, ?)", compras)
+
+# Escrever uma consulta para exibir o nome do cliente, o produto e o valor de cada compra
+c.execute("SELECT c.nome, co.produto, co.valor FROM clientes c INNER JOIN compras co ON c.id = co.cliente_id")
+
+# Exibir os resultados
+resultado = c.fetchall()
+for linha in resultado:
+    print(f"Cliente: {linha[0]}, Produto: {linha[1]}, Valor: {linha[2]}")
+
+# Fechar a conexão
+conexao.close()
