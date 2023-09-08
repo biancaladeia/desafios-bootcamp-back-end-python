@@ -81,3 +81,62 @@ print(c.fetchall())
 conexao.commit()  # Salvar as alterações
 conexao.close()
 
+'''
+5. Criar uma Tabela e Inserir Dados
+Crie uma tabela chamada "clientes" com os campos: id (chave
+primária), nome (texto), idade (inteiro) e saldo (float). Insira alguns
+registros de clientes na tabela.
+'''
+
+# Criar a tabela "clientes"
+c.execute('CREATE TABLE clientes (id INT, nome VARCHAR(100), idade INT, saldo FLOAT)')
+
+# Inserir registros de clientes
+clientes = [
+    (1, 'João', 30, 1000.50),
+    (2, 'Maria', 25, 500.75),
+    (3, 'Pedro', 35, 1500.25),
+    (4, 'Ana', 28, 2000.0),
+    (5, 'Miguel', 40, 300.0)
+]
+
+c.executemany("INSERT INTO clientes VALUES (?, ?, ?, ?)", clientes)
+
+# Salvar as alterações e fechar a conexão
+conexao.commit()
+conexao.close()
+
+
+'''
+6. Consultas e Funções Agregadas
+Escreva consultas SQL para realizar as seguintes tarefas:
+a) Selecione o nome e a idade dos clientes com idade superior a
+30 anos.
+b) Calcule o saldo médio dos clientes.
+c) Encontre o cliente com o saldo máximo.
+d) Conte quantos clientes têm saldo acima de 1000.'''
+
+
+# a) Selecione o nome e a idade dos clientes com idade superior a 30 anos
+c.execute("SELECT nome, idade FROM clientes WHERE idade > 30")
+print("a) Clientes com mais de 30 anos:")
+print(c.fetchall())
+
+# b) Calcule o saldo médio dos clientes
+c.execute("SELECT AVG(saldo) FROM clientes")
+media_saldo = c.fetchone()[0]
+print(f"\nb) Saldo médio dos clientes: {media_saldo}")
+
+# c) Encontre o cliente com o saldo máximo
+c.execute("SELECT * FROM clientes ORDER BY saldo DESC LIMIT 1")
+cliente_max_saldo = c.fetchone()
+print(f"\nc) Cliente com saldo máximo: {cliente_max_saldo}")
+
+# d) Conte quantos clientes têm saldo acima de 1000
+c.execute("SELECT COUNT(*) FROM clientes WHERE saldo > 1000")
+total_clientes_saldo_maior_1000 = c.fetchone()[0]
+print(f"\nd) Total de clientes com saldo acima de 1000: {total_clientes_saldo_maior_1000}")
+
+# Fechar a conexão
+conexao.close()
+
