@@ -30,3 +30,54 @@ c.execute("INSERT INTO alunos VALUES (5, 'Miguel', 23, 'Administração')")
 conexao.commit()
 conexao.close()
 
+'''
+3. Consultas Básicas
+Escreva consultas SQL para realizar as seguintes tarefas:
+a) Selecionar todos os registros da tabela "alunos".
+b) Selecionar o nome e a idade dos alunos com mais de 20 anos.
+c) Selecionar os alunos do curso de "Engenharia" em ordem
+alfabética.
+d) Contar o número total de alunos na tabela '''
+
+# a) Selecionar todos os registros da tabela "alunos"
+c.execute("SELECT * FROM alunos")
+print("a) Todos os registros da tabela:")
+print(c.fetchall())
+
+# b) Selecionar o nome e a idade dos alunos com mais de 20 anos
+c.execute("SELECT nome, idade FROM alunos WHERE idade > 20")
+print("\nb) Alunos com mais de 20 anos:")
+print(c.fetchall())
+
+# c) Selecionar os alunos do curso de "Engenharia" em ordem alfabética
+c.execute("SELECT * FROM alunos WHERE curso = 'Engenharia' ORDER BY nome")
+print("\nc) Alunos de Engenharia em ordem alfabética:")
+print(c.fetchall())
+
+# d) Contar o número total de alunos na tabela
+c.execute("SELECT COUNT(*) FROM alunos")
+total_alunos = c.fetchone()[0]
+print(f"\nd) Total de alunos na tabela: {total_alunos}")
+
+conexao.close()
+
+'''
+4. Atualização e Remoção
+a) Atualize a idade de um aluno específico na tabela.
+b) Remova um aluno pelo seu ID.'''
+
+# a) Atualizar a idade de um aluno específico na tabela
+c.execute("UPDATE alunos SET idade = ? WHERE id = ?", (23, 2))
+
+# b) Remover um aluno pelo seu ID
+c.execute("DELETE FROM alunos WHERE id = ?", (4,))
+
+# Exibir os registros atualizados
+c.execute("SELECT * FROM alunos")
+print("Registros após a atualização e remoção:")
+print(c.fetchall())
+
+# Fechar a conexão
+conexao.commit()  # Salvar as alterações
+conexao.close()
+
