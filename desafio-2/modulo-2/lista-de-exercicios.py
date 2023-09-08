@@ -208,4 +208,3 @@ for linha in resultado:
 
 # Fechar a conexão
 conexao.close()
-
