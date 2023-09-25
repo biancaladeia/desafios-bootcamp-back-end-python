@@ -91,19 +91,17 @@ n = leiaInt(‘Digite um n’)
 
 *O desafio 2 corresponde a todos os exercícios da Semana 3 como conceitos de orientção a objetos e banco de dados.*
 
-### Módulo 1 - Orientação a objetos
+### Módulo 1 
 
-**1.** 
-Crie uma classe que modele o objeto "carro".
+### Módulo 2
 
-    Um carro tem os seguintes atributos: ligado, cor, modelo, velocidade.
-    
-    Um carro tem os seguintes comportamentos: liga, desliga, acelera, desacelera.
-    
-    Crie uma instância da classe carro.
-    
-    Faça o carro "andar" utilizando os métodos da sua classe.
-    
-    Faça o carro "parar" utilizando os métodos da sua classe.
+### Módulo 3
 
+## Desafio 3
+
+### Flask 
+
+### FastAPI
+
+### HTTP (extra)
 

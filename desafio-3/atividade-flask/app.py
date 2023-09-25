@@ -22,13 +22,13 @@ def get_profile(id):
     data = response.read()
     profile_dict = json.loads(data)
 
-    # Obter informações de origem
+    # Informações de origem
     origin_url = profile_dict["origin"]["url"]
     origin_response = urllib.request.urlopen(origin_url)
     origin_data = origin_response.read()
     origin_dict = json.loads(origin_data)
 
-    # Obter informações de localização
+    # Informações de localização
     location_url = profile_dict["location"]["url"]
     location_response = urllib.request.urlopen(location_url)
     location_data = location_response.read()
