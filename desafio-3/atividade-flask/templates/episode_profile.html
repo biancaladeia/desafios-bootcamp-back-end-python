@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h1>{{ episode.name }}</h1>
+        <p><strong>Data de Lançamento:</strong> {{ episode.air_date }}</p>
+        <p><strong>Código:</strong> {{ episode.episode }}</p>
+    </div>
+</div>
+{% endblock %}
