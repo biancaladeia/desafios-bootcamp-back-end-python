@@ -23,3 +23,6 @@ Desafio proposto na Semana 4 sobre requisições HTTP.
 
 ## Desafio 4
 *Criação de um aplicativo Web de IA usando Python e Flask.*
+
+## Desafio 5
+*Explore o espaço com o Python e o Visual Studio Code*
